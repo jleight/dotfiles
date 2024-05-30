@@ -1,0 +1,7 @@
+{{ if eq .chezmoi.os "linux" -}}
+#export PATH="/home/linuxbrew/.linuxbrew/sbin:${PATH}"
+#export PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+{{ else if eq .chezmoi.os "darwin" -}}
+eval $(/opt/homebrew/bin/brew shellenv)
+{{ end -}}

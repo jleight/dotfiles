@@ -1,0 +1,6 @@
+packages:
+  linux:
+    brew:
+      - htop
+      - neovim
+      - zsh

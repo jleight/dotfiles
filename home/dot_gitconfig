@@ -1,0 +1,11 @@
+[user]
+	name = Jonathon Leight
+	email = jonathon.leight@jleight.com
+[init]
+	defaultBranch = main
+[push]
+	default = current
+[pull]
+	rebase = true
+[rebase]
+	autostash = true

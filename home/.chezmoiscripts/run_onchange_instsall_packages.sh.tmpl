@@ -1,0 +1,19 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+
+main() {
+	if is_command brew; then
+		brew bundle --no-lock --file=/dev/stdin <<-EOF
+{{ range .packages.linux.brew -}}
+		 	brew {{ . | quote }}
+{{ end -}}
+		EOF
+	fi
+}
+
+is_command() {
+	type "${1}" >/dev/null 2>&1
+}
+
+main "$@"
+{{ end -}}
