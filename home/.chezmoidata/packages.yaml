@@ -1,6 +1,13 @@
 packages:
-  brew:
-    - atuin
-    - htop
-    - neovim
-    - zsh
+  base:
+    brew:
+      - atuin
+      - htop
+      - neovim
+      - zsh
+  work:
+    brew:
+      - terragrunt
+      - opentofu
+    cask:
+      - git-credential-manager

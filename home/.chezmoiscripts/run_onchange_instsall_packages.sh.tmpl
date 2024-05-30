@@ -15,9 +15,15 @@ is_command() {
 main() {
 	if is_command brew; then
 		brew bundle --no-lock --file=/dev/stdin <<-EOF
-{{ range .packages.brew -}}
+{{- range .packages.base.brew }}
 		 	brew {{ . | quote }}
-{{ end -}}
+{{- end }}
+{{- range (index .packages .profile.key "brew") }}
+		 	brew {{ . | quote }}
+{{- end }}
+{{- range (index .packages .profile.key "cask") }}
+		 	cask {{ . | quote }}
+{{- end }}
 		EOF
 	fi
 }
