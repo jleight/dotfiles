@@ -1,5 +1,0 @@
-{{ if lookPath "nvim" -}}
-export EDITOR={{ lookPath "nvim" | quote }}
-{{ else if lookPath "vim" -}}
-export EDITOR={{ lookPath "vim" | quote }}
-{{ end -}}

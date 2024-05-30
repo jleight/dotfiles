@@ -1,0 +1,4 @@
+{{ if stat (joinPath .chezmoi.homeDir ".cargo/env") -}}
+# Added by Cargo
+. "$HOME/.cargo/env"
+{{- end }}

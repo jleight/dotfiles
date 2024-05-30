@@ -13,13 +13,19 @@ is_command() {
 }
 
 main() {
-	if is_command brew; then
-		brew bundle --no-lock --file=/dev/stdin <<-EOF
-{{ range .packages.brew -}}
-		 	brew {{ . | quote }}
-{{ end -}}
-		EOF
+	if is_command op; then
+		exit 0
 	fi
+
+	if is_command brew; then
+		if [[ "$(uname -s)" = "Darwin" ]]; then
+			brew install --cask 1password-cli
+			exit 0
+		fi
+	fi
+
+	echo "You must manually install 1Password CLI!"
+	exit 1
 }
 
 main "$@"

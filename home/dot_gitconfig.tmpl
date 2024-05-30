@@ -1,6 +1,7 @@
 [user]
-	name = Jonathon Leight
-	email = {{ .email }}
+	name = {{ .me.name }}
+	email = {{ .me.email }}
+	signingkey = {{ onepasswordRead (printf "op://%s/GIT Signing/public key" .profile.op.vault) .profile.op.account }}
 [init]
 	defaultBranch = main
 [push]

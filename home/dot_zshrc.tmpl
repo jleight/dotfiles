@@ -1,0 +1,17 @@
+export ZSH="${HOME}/.oh-my-zsh"
+
+zstyle ':omz:update' mode disabled
+plugins=(git terragrunt)
+
+ZSH_THEME="gentoo"
+source "${ZSH}/oh-my-zsh.sh"
+
+{{ if lookPath "atuin" -}}
+# Capture shell history with Atuin
+eval "$(atuin init zsh --disable-up-arrow)"
+{{- end }}
+
+# Aliases
+{{ if lookPath "nvim" -}}
+alias vim="nvim"
+{{- end }}

@@ -1,6 +1,6 @@
 packages:
-  linux:
-    brew:
-      - htop
-      - neovim
-      - zsh
+  brew:
+    - atuin
+    - htop
+    - neovim
+    - zsh

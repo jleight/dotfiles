@@ -1,4 +1,24 @@
-{{ $email := promptString "email" -}}
+{{ $email       := promptStringOnce . "me.email" "Email Address" -}}
+{{ $profile_key := promptChoiceOnce . "profile.key" "Profile" (list "home" "work") -}}
 
+{{ $op_account := "my.1password.com" -}}
+{{ $op_vault   := "Personal" -}}
+
+{{ if eq $profile_key "work" -}}
+{{   $op_account = "kangarootime.1password.com" -}}
+{{   $op_vault   = "Employee" -}}
+{{ end -}}
+---
 data:
-  email: {{ $email | quote }}
+  me:
+    name: Jonathon Leight
+    email: {{ $email | quote }}
+  profile:
+    key: {{ $profile_key| quote }}
+    op:
+      account: {{ $op_account | quote }}
+      vault: {{ $op_vault | quote }}
+hooks:
+  read-source-state:
+    pre:
+      command: .local/share/chezmoi/home/.chezmoihooks/read-source-state.pre.sh

@@ -1,3 +1,6 @@
+" disable mouse
+set mouse=
+
 " fix uppercase commands
 command WQ wq
 command Wq wq
@@ -19,6 +22,9 @@ inoremap <C-S-k> <Esc>ddkPi
 
 " show whitespace
 set list listchars=tab:>-,trail:~,extends:>,precedes:<
+
+" show line numbers
+set number
 
 " load plugins
 lua require('plugins')

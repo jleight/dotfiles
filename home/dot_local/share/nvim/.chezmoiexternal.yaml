@@ -1,0 +1,4 @@
+"site/pack/packer/start/packer.nvim":
+  url: https://github.com/wbthomason/packer.nvim
+  type: git-repo
+  refreshPeriod: "168h"

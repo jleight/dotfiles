@@ -1,0 +1,59 @@
+{{ if lookPath "nvim" -}}
+export EDITOR={{ lookPath "nvim" | quote }}
+{{- else if lookPath "vim" -}}
+export EDITOR={{ lookPath "vim" | quote }}
+{{- end }}
+
+{{ if findExecutable "brew" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin") -}}
+# Set up Homebrew
+eval "$({{ findExecutable "brew" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin") }} shellenv)"
+{{- end }}
+
+# Manipulate PATH
+{{ if stat "/opt/homebrew/opt/curl/bin" -}}
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+{{ end -}}
+{{ if stat "/opt/homebrew/opt/openssl@3/bin" -}}
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+{{ end -}}
+{{ if stat (joinPath .chezmoi.homeDir ".dotnet/tools") -}}
+export PATH="$PATH:$HOME/.dotnet/tools"
+{{ end -}}
+{{ if stat (joinPath .chezmoi.homeDir "go/bin") -}}
+export PATH="$PATH:$HOME/go/bin"
+{{ end -}}
+{{ if stat (joinPath .chezmoi.homeDir ".krew/bin") -}}
+export PATH="$PATH:$HOME/.krew/bin"
+{{ end -}}
+export PATH="$HOME/.local/bin:$PATH"
+
+# Global ENV
+export ASPNETCORE_ENVIRONMENT="Development"
+export ASPNETCORE_HOSTINGSTARTUPASSEMBLIES="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
+
+{{ if eq .profile.key "work" -}}
+# Work ENV
+export AZDO_ORG_SERVICE_URL="{{ onepasswordRead (printf "op://%s/Azure DevOps PAT/hostname" .profile.op.vault) .profile.op.account }}"
+export AZDO_PERSONAL_ACCESS_TOKEN="{{ onepasswordRead (printf "op://%s/Azure DevOps PAT/credential" .profile.op.vault) .profile.op.account }}"
+export CLOUDFLARE_API_TOKEN="{{ onepasswordRead (printf "op://%s/Cloudflare API Token/credential" .profile.op.vault) .profile.op.account }}"
+export Serilog__KtDefaults__Seq__Enabled="false"
+export Serilog__KtDefaults__Console__MinimumLevel="Verbose"
+{{- end }}
+
+{{ if lookPath "terragrunt" -}}
+# Terragrunt ENV
+export TERRAGRUNT_PROVIDER_CACHE="1"
+{{ if lookPath "tofu" -}}
+export TERRAGRUNT_TFPATH="tofu"
+{{- end }}
+{{- end }}
+
+{{ if stat (joinPath .chezmoi.homeDir "/Library/Application Support/JetBrains/Toolbox/scripts") -}}
+# Added by Toolbox App
+export PATH="$PATH:{{ joinPath .chezmoi.homeDir "/Library/Application Support/JetBrains/Toolbox/scripts" }}"
+{{- end }}
+
+{{ if stat (joinPath .chezmoi.homeDir ".orbstack/shell/init.zsh") -}}
+# Added by OrbStack: command-line tools and integration
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+{{- end }}
