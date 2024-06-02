@@ -5,6 +5,9 @@ packages:
       - htop
       - neovim
       - zsh
+  home:
+    brew: []
+    cask: []
   work:
     brew:
       - terragrunt
