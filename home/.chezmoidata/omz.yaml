@@ -1,0 +1,18 @@
+omz:
+  theme: gentoo
+  plugins:
+    - name: asdf
+    - name: aws
+    - name: brew
+    - name: direnv
+    - name: docker
+    - name: docker-compose
+      test: docker
+    - name: dotnet
+    - name: fzf
+    - name: git
+    - name: kubectl
+    - name: terraform
+      test: tofu
+    - name: terragrunt
+    - name: zoxide
