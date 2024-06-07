@@ -21,7 +21,9 @@ vim.cmd([[
 
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
+  use 'alker0/chezmoi.vim'
   use 'tpope/vim-sleuth'
+  use 'xvzc/chezmoi.nvim'
 
   if packer_bootstrap then
     require('packer').sync()
