@@ -34,3 +34,8 @@ source "${ZSH}/oh-my-zsh.sh"
 # Capture shell history with Atuin
 eval "$(atuin init zsh)"
 {{- end }}
+
+{{ if lookPath "mise" -}}
+# Activate Mise
+eval "$(mise activate zsh)"
+{{- end }}
