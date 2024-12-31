@@ -1,13 +1,13 @@
 # Aliases
-{{ if lookPath "bat" -}}
+{{- if lookPath "bat" }}
 alias cat="bat --paging=never"
 {{- end }}
 alias cwd="pwd | tr -d '\n' | pbcopy"
-{{ if lookPath "tofu" -}}
+{{- if lookPath "tofu" }}
 alias terraform="tofu"
 alias tf="tofu"
 {{- end }}
-{{ if lookPath "nvim" -}}
+{{- if lookPath "nvim" }}
 alias vim="nvim"
 {{- end }}
 
