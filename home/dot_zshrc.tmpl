@@ -3,6 +3,9 @@
 alias cat="bat --paging=never"
 {{- end }}
 alias cwd="pwd | tr -d '\n' | pbcopy"
+{{- if lookPath "mise" }}
+alias mx="mise run"
+{{- end }}
 {{- if lookPath "tofu" }}
 alias terraform="tofu"
 alias tf="tofu"
