@@ -1,9 +1,9 @@
-".":
+.oh-my-zsh:
   url: https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz
   type: archive
   stripComponents: 1
   refreshPeriod: "168h"
-"custom/plugins/terragrunt":
+.oh-my-zsh/custom/plugins/terragrunt:
   url: git@github.com:jleight/terragrunt-zsh-plugin.git
   type: git-repo
   refreshPeriod: "168h"
