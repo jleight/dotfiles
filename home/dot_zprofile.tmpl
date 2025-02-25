@@ -41,9 +41,9 @@ export Serilog__KtDefaults__Console__MinimumLevel="Verbose"
 
 {{ if lookPath "terragrunt" -}}
 # Terragrunt ENV
-export TERRAGRUNT_PROVIDER_CACHE="1"
+export TG_PROVIDER_CACHE="true"
 {{ if lookPath "tofu" -}}
-export TERRAGRUNT_TFPATH="tofu"
+export TG_TF_PATH="tofu"
 {{- end }}
 {{- end }}
 
