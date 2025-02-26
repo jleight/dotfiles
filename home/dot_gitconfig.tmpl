@@ -1,15 +1,43 @@
 [user]
 	name = {{ .me.name }}
 	email = {{ .me.email }}
-	signingkey = {{ onepasswordRead (printf "op://%s/GIT Signing/public key" .profile.op.vault) .profile.op.account }}
+	signingKey = {{ onepasswordRead (printf "op://%s/GIT Signing/public key" .profile.op.vault) .profile.op.account }}
 [init]
 	defaultBranch = main
 [push]
-	default = current
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
 [pull]
 	rebase = true
 [rebase]
-	autostash = true
+	autoStash = true
+	updateRefs = true
+[rerere]
+	enabled = true
+	autoUpdate = true
+[commit]
+	verbose = true
+[merge]
+	conflictStyle = zdiff3
+
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	renames = true
+	mnemonicPrefix = true
+
 {{- if eq .profile.key "work" }}
 [credential]
 	helper = /usr/local/share/gcm-core/git-credential-manager
