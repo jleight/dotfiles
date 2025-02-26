@@ -1,3 +1,15 @@
+# Set up XDG
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+{{ if eq .chezmoi.os "darwin" -}}
+export XDG_RUNTIME_DIR="$(getconf DARWIN_USER_TEMP_DIR)"
+{{- else -}}
+export XDG_RUNTIME_DIR="/run/user/$UID"
+{{- end }}
+export XDG_STATE_HOME="$HOME/.local/state"
+
+# Set up vim
 {{ if lookPath "nvim" -}}
 export EDITOR={{ lookPath "nvim" | quote }}
 {{- else if lookPath "vim" -}}
