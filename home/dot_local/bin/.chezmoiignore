@@ -1,0 +1,3 @@
+{{ if ne .profile.key "work" -}}
+ktjwt
+{{- end }}

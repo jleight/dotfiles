@@ -1,0 +1,48 @@
+#!/usr/bin/env zsh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [[ "${TRACE-0}" == "1" ]]; then
+	set -o xtrace
+fi
+
+main() {
+	local -a flag_product=("k2")
+	local -a flag_stack=()
+	local -a flag_environment=("dev")
+	local -a flag_instance=("us")
+	local -a flag_component=()
+
+	zmodload zsh/zutil
+
+	zparseopts -D -E -F -K -- \
+			{p,-product}:=flag_product \
+			{s,-stack}:=flag_stack \
+			{e,-environment}:=flag_environment \
+			{i,-instance}:=flag_instance \
+			{c,-component}:=flag_component \
+		|| exit 1
+
+	(( ${#flag_stack[@]} > 0 )) || { print -l "missing -s,--stack argument" && exit 1 }
+	(( ${#flag_component[@]} > 0 )) || { print -l "missing -c,--component argument" && exit 1 }
+
+	local product="${flag_product[-1]}"
+	local stack="${flag_stack[-1]}"
+	local environment="${flag_environment[-1]}"
+	local instance="${flag_instance[-1]}"
+	local component="${flag_component[-1]}"
+
+	local resource_name="${product}-${stack}-${environment}-${instance}-${component}"
+	local resource="api://${resource_name}"
+
+	echo "Fetching token for ${resource_name}..."
+	echo
+
+	az account get-access-token --resource "${resource}" \
+		| jq -r .accessToken \
+		| tee >(pbcopy)
+}
+
+main "$@"
