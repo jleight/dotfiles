@@ -1,3 +1,9 @@
+# .NET scripts
+{{ if not (lookPath "dotnet") -}}
+executable_dotnet-*
+{{- end }}
+
+# Work only scripts
 {{ if ne .profile.key "work" -}}
-ktjwt
+executable_ktjwt
 {{- end }}
