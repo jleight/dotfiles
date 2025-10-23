@@ -17,6 +17,14 @@ alias vim="nvim"
 # Disable OMZ updates
 zstyle ':omz:update' mode disabled
 
+# Only re-initialize completions once per day
+autoload -Uz compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+	compinit
+else
+	compinit -C
+fi
+
 # Enable OMZ plugins
 plugins=(
 {{- range .omz.plugins }}
