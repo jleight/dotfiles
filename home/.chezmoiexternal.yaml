@@ -7,3 +7,7 @@
   url: git@github.com:jleight/terragrunt-zsh-plugin.git
   type: git-repo
   refreshPeriod: "168h"
+.oh-my-zsh/custom/plugins/mise-run:
+  url: git@github.com:jleight/mise-run-zsh-plugin.git
+  type: git-repo
+  refreshPeriod: "168h"

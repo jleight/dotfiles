@@ -12,6 +12,9 @@ omz:
     - name: fzf
     - name: git
     - name: kubectl
+    - name: mise
+    - name: mise-run
+      test: mise
     - name: terraform
       test: tofu
     - name: terragrunt

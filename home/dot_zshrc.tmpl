@@ -3,9 +3,6 @@
 alias cat="bat --paging=never"
 {{- end }}
 alias cwd="pwd | tr -d '\n' | pbcopy"
-{{- if lookPath "mise" }}
-alias mx="mise run"
-{{- end }}
 {{- if lookPath "tofu" }}
 alias terraform="tofu"
 alias tf="tofu"
@@ -44,11 +41,6 @@ source "${ZSH}/oh-my-zsh.sh"
 {{ if lookPath "atuin" -}}
 # Capture shell history with Atuin
 eval "$(atuin init zsh)"
-{{- end }}
-
-{{ if lookPath "mise" -}}
-# Activate Mise
-eval "$(mise activate zsh)"
 {{- end }}
 
 # Activate DNVM
