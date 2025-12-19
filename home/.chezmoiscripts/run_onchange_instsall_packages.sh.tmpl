@@ -15,16 +15,22 @@ is_command() {
 main() {
 	if is_command brew; then
 		brew bundle --no-lock --file=/dev/stdin <<-EOF
-{{- range .packages.base.brew }}
-			brew {{ . | quote }}
+{{- range .packages.base }}
+			{{ default "brew" (index . "type") }} {{ .name | quote }}
 {{- end }}
-{{- range (index .packages .profile.key "brew") }}
-			brew {{ . | quote }}
-{{- end }}
-{{- range (index .packages .profile.key "cask") }}
-			cask {{ . | quote }}
+{{- range (index .packages .profile.key) }}
+			{{ default "brew" (index . "type") }} {{ .name | quote }}
 {{- end }}
 		EOF
+	elif is_command paru; then
+		paru -S --needed --noconfirm \
+{{- range .packages.base }}
+			{{ .name | quote }} \
+{{- end }}
+{{- range (index .packages .profile.key) }}
+			{{ .name | quote }} \
+{{- end }}
+			paru
 	fi
 }
 

@@ -1,16 +1,14 @@
 packages:
   base:
-    brew:
-      - atuin
-      - htop
-      - neovim
-      - zsh
-  home:
-    brew: []
-    cask: []
+    - name: atuin
+    - name: btop
+    - name: htop
+    - name: mise
+    - name: neovim
+    - name: opentofu
+    - name: terragrunt
+    - name: zsh
+  home: []
   work:
-    brew:
-      - terragrunt
-      - opentofu
-    cask:
-      - git-credential-manager
+    - name: git-credential-manager
+      type: cask
