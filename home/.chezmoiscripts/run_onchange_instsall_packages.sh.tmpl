@@ -14,7 +14,7 @@ is_command() {
 
 main() {
 	if is_command brew; then
-		brew bundle --no-lock --file=/dev/stdin <<-EOF
+		brew bundle --file=/dev/stdin <<-EOF
 {{- range .packages.base }}
 			{{ default "brew" (index . "type") }} {{ .name | quote }}
 {{- end }}
