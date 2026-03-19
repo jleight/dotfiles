@@ -72,8 +72,3 @@ source "${ZSH}/oh-my-zsh.sh"
 # Capture shell history with Atuin
 eval "$(atuin init zsh)"
 {{- end }}
-
-# Activate DNVM
-if [ -f "${HOME}/Library/Application Support/dnvm/env" ]; then
-	. "${HOME}/Library/Application Support/dnvm/env"
-fi
