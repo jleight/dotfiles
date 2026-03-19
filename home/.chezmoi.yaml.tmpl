@@ -1,5 +1,5 @@
 {{ $email       := promptStringOnce . "me.email" "Email Address" -}}
-{{ $profile_key := promptChoiceOnce . "profile.key" "Profile" (list "home" "work") -}}
+{{ $profile_key := promptChoiceOnce . "profile.key" "Profile" (list "laptop" "server" "work") -}}
 
 {{ $op_account := "my.1password.com" -}}
 {{ $op_vault   := "Personal" -}}

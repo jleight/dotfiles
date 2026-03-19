@@ -2,13 +2,178 @@ packages:
   base:
     - name: atuin
     - name: btop
+    - name: chezmoi
+    - name: dust
+    - name: git
     - name: htop
     - name: mise
     - name: neovim
-    - name: opentofu
-    - name: terragrunt
+    - name: ripgrep
+    - name: tealdeer
+    - name: tmux
     - name: zsh
-  home: []
+  laptop:
+    - name: affinity-designer
+      type: cask
+    - name: affinity-photo
+      type: cask
+    - name: affinity-publisher
+      type: cask
+    - name: age
+    - name: airflow
+      type: cask
+    - name: alfred
+      type: cask
+    - name: balenaetcher
+      type: cask
+    - name: bat
+    - name: battle-net
+      type: cask
+    - name: betterdisplay
+      type: cask
+    - name: bettertouchtool
+      type: cask
+    - name: beyond-compare
+      type: cask
+    - name: crossover
+      type: cask
+    - name: daisydisk
+      type: cask
+    - name: discord
+      type: cask
+    - name: firefox
+      type: cask
+    - name: font-monaspace-frozen
+      type: cask
+    - name: fork
+      type: cask
+    - name: forklift
+      type: cask
+    - name: freelens
+      type: cask
+    - name: hyperfine
+    - name: iterm2
+      type: cask
+    - name: jetbrains-toolbox
+      type: cask
+    - name: jordanbaird-ice@beta
+      type: cask
+    - name: keyboardcleantool
+      type: cask
+    - name: logi-options+
+      type: cask
+    - name: mactop
+    - name: mas
+    - name: microsoft-auto-update
+      type: cask
+    - name: microsoft-edge
+      type: cask
+    - name: microsoft-office
+      type: cask
+    - name: moonlight
+      type: cask
+    - name: mullvad-vpn
+      type: cask
+    - name: multipatch
+      type: cask
+    - name: netspot
+      type: cask
+    - name: opentofu
+    - name: orbstack
+      type: cask
+    - name: orion
+      type: cask
+    - name: prusaslicer
+      type: cask
+    - name: qflipper
+      type: cask
+    - name: rectangle-pro
+      type: cask
+    - name: setapp
+      type: cask
+    - name: shottr
+      type: cask
+    - name: signal
+      type: cask
+    - name: steam
+      type: cask
+    - name: sublime-text
+      type: cask
+    - name: tailscale-app
+      type: cask
+    - name: terragrunt
+    - name: via
+      type: cask
+    - name: visual-studio-code
+      type: cask
+    - name: vlc
+      type: cask
+    - name: wifiman
+      type: cask
+    - name: wowup
+      type: cask
+    - name: zed
+      type: cask
+  server: []
   work:
+    - name: alfred
+      type: cask
+    - name: bat
+    - name: betterdisplay
+      type: cask
+    - name: bettertouchtool
+      type: cask
+    - name: beyond-compare
+      type: cask
+    - name: daisydisk
+      type: cask
+    - name: firefox
+      type: cask
+    - name: font-monaspace-frozen
+      type: cask
+    - name: fork
+      type: cask
+    - name: forklift
+      type: cask
+    - name: freelens
+      type: cask
     - name: git-credential-manager
+      type: cask
+    - name: hyperfine
+    - name: iterm2
+      type: cask
+    - name: jetbrains-toolbox
+      type: cask
+    - name: jordanbaird-ice@beta
+      type: cask
+    - name: keyboardcleantool
+      type: cask
+    - name: logi-options+
+      type: cask
+    - name: mactop
+    - name: microsoft-auto-update
+      type: cask
+    - name: microsoft-edge
+      type: cask
+    - name: microsoft-office
+      type: cask
+    - name: opentofu
+    - name: orbstack
+      type: cask
+    - name: rectangle-pro
+      type: cask
+    - name: setapp
+      type: cask
+    - name: shottr
+      type: cask
+    - name: slack
+      type: cask
+    - name: sublime-text
+      type: cask
+    - name: tailscale-app
+      type: cask
+    - name: terragrunt
+    - name: visual-studio-code
+      type: cask
+    - name: zed
       type: cask
