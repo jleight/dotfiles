@@ -1,0 +1,9 @@
+{{- $hasPiAgent := false }}
+{{- range (index .mise .profile.key).tools }}
+{{- if eq .name "npm:@mariozechner/pi-coding-agent" }}
+{{- $hasPiAgent = true }}
+{{- end }}
+{{- end }}
+{{- if not $hasPiAgent }}
+*
+{{- end }}

@@ -1,0 +1,20 @@
+{{- $profile := .profile -}}
+
+[settings]
+experimental = true
+
+[tools]
+{{- range (index .mise $profile.key).tools }}
+{{ .name | quote }} = {{ default "latest" (index . "version") | quote }}
+{{- end }}
+
+[env]
+{{- range (index .mise $profile.key).env }}
+{{- $secret := index . "secret" }}
+{{- $value := index . "value" }}
+{{- if $secret }}
+{{ .name }} = "{{ onepasswordRead (printf "op://%s/%s" $profile.op.vault $secret) $profile.op.account }}"
+{{- else if $value }}
+{{ .name }} = "{{ $value }}"
+{{- end }}
+{{- end }}

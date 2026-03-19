@@ -1,0 +1,43 @@
+{
+  "providers": {
+    "openwebui": {
+      "baseUrl": "{{ onepasswordRead (printf "op://%s/Open WebUI/website" .profile.op.vault) .profile.op.account }}/api",
+      "api": "openai-completions",
+      "apiKey": "{{ onepasswordRead (printf "op://%s/Open WebUI/api key" .profile.op.vault) .profile.op.account }}",
+      "models": [
+        {
+          "id": "unsloth/gpt-oss-20b-GGUF:UD-Q8_K_XL",
+          "name": "GPT OSS 20b",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 131072,
+          "maxTokens": 131072,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "unsloth/Qwen3-Coder-Next-GGUF:UD-Q4_K_XL",
+          "name": "Qwen3 Coder Next",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 262144,
+          "maxTokens": 262144,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    }
+  }
+}

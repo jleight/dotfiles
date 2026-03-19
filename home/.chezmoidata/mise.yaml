@@ -1,0 +1,22 @@
+mise:
+  laptop:
+    tools:
+      - name: node
+      - name: npm:@mariozechner/pi-coding-agent
+    env:
+      - name: B2_TF_BUCKET_ENDPOINT
+        secret: Backblaze - Terraform State/website
+      - name: B2_TF_BUCKET_NAME
+        secret: Backblaze - Terraform State/bucket
+      - name: B2_TF_APPLICATION_KEY_ID
+        secret: Backblaze - Terraform State/username
+      - name: B2_TF_APPLICATION_KEY
+        secret: Backblaze - Terraform State/password
+      - name: PI_CODING_AGENT_DIR
+        value: "{{ env.XDG_CONFIG_HOME }}/pi/agent"
+  server:
+    tools: []
+    env: []
+  work:
+    tools: []
+    env: []
