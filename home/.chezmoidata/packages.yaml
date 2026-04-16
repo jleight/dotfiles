@@ -118,6 +118,8 @@ packages:
   work:
     - name: alfred
       type: cask
+    - name: app-tamer
+      type: cask
     - name: bat
     - name: betterdisplay
       type: cask
@@ -125,7 +127,10 @@ packages:
       type: cask
     - name: beyond-compare
       type: cask
+    - name: claude-code
     - name: daisydisk
+      type: cask
+    - name: drawio
       type: cask
     - name: firefox
       type: cask
@@ -139,6 +144,10 @@ packages:
       type: cask
     - name: git-credential-manager
       type: cask
+    - name: google-chrome
+      type: cask
+    - name: httpie-desktop
+      type: cask
     - name: hyperfine
     - name: iterm2
       type: cask
@@ -147,6 +156,12 @@ packages:
     - name: jordanbaird-ice@beta
       type: cask
     - name: keyboardcleantool
+      type: cask
+    - name: launchcontrol
+      type: cask
+    - name: leapp
+      type: cask
+    - name: linqpad
       type: cask
     - name: logi-options+
       type: cask
@@ -173,7 +188,9 @@ packages:
     - name: tailscale-app
       type: cask
     - name: terragrunt
-    - name: visual-studio-code
+    - name: visual-studio-code@insiders
+      type: cask
+    - name: xscope
       type: cask
     - name: zed
       type: cask
