@@ -54,3 +54,6 @@ mise:
         value: false
       - name: Serilog__KtDefaults__Console__MinimumLevel
         value: Verbose
+    shell_aliases:
+      - name: yolo
+        command: claude --dangerously-skip-permissions

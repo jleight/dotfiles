@@ -18,8 +18,13 @@ experimental = true
 {{- $secret := index . "secret" }}
 {{- $value := index . "value" }}
 {{- if $secret }}
-{{ .name }} = "{{ onepasswordRead (printf "op://%s/%s" $profile.op.vault $secret) $profile.op.account }}"
+{{ .name }} = {{ onepasswordRead (printf "op://%s/%s" $profile.op.vault $secret) $profile.op.account | quote }}
 {{- else if $value }}
-{{ .name }} = "{{ $value }}"
+{{ .name }} = {{ $value | quote }}
 {{- end }}
+{{- end }}
+
+[shell_alias]
+{{- range (index .mise $profile.key).shell_aliases }}
+{{ .name }} = {{ .command | quote }}
 {{- end }}
