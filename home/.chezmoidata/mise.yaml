@@ -4,6 +4,8 @@ mise:
       - name: node
       - name: npm:@mariozechner/pi-coding-agent
     env:
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
       - name: B2_TF_BUCKET_ENDPOINT
         secret: Backblaze - Terraform State/website
       - name: B2_TF_BUCKET_NAME
@@ -18,5 +20,37 @@ mise:
     tools: []
     env: []
   work:
-    tools: []
-    env: []
+    tools:
+      - name: bun
+      - name: dotnet
+        version: [10, 9, 8, 7, 6]
+      - name: hk
+      - name: node
+        version: lts
+      - name: pitchfork
+      - name: uv
+      - name: npm:@mariozechner/pi-coding-agent
+      - name: npm:@opentofu/opentofu-mcp-server
+      - name: npm:chrome-devtools-mcp
+      - name: npm:skills
+      - name: pipx:pynvim
+      - name: pipx:postgres-mcp
+    env:
+      - name: MISE_EXPERIMENTAL
+        value: 1
+      - name: ASPNETCORE_ENVIRONMENT
+        value: Development
+      - name: AZDO_ORG_SERVICE_URL
+        secret: Azure DevOps PAT/hostname
+      - name: AZDO_PERSONAL_ACCESS_TOKEN
+        secret: Azure DevOps PAT/credential
+      - name: BUNNYNET_API_KEY
+        secret: Bunny.net/api key
+      - name: CLOUDFLARE_API_TOKEN
+        secret: Cloudflare API Token/credential
+      - name: PI_CODING_AGENT_DIR
+        value: "{{ env.XDG_CONFIG_HOME }}/pi/agent"
+      - name: Serilog__KtDefaults__Seq__Enabled
+        value: false
+      - name: Serilog__KtDefaults__Console__MinimumLevel
+        value: Verbose

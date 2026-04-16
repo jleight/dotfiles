@@ -5,7 +5,12 @@ experimental = true
 
 [tools]
 {{- range (index .mise $profile.key).tools }}
-{{ .name | quote }} = {{ default "latest" (index . "version") | quote }}
+{{ .name | quote }} = {{ $version := default "latest" (index . "version") -}}
+{{- if eq (kindOf $version) "slice" -}}
+[{{- range $i, $v := $version }}{{ if $i }}, {{ end }}"{{ $v }}"{{ end }}]
+{{- else -}}
+"{{ $version }}"
+{{- end }}
 {{- end }}
 
 [env]

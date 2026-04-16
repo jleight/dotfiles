@@ -16,16 +16,6 @@ export PATH="$PATH:$HOME/go/bin"
 {{- end }}
 export PATH="$HOME/.local/bin:$PATH"
 
-# ENV
-export ASPNETCORE_ENVIRONMENT="Development"
-{{- if eq .profile.key "work" }}
-export AZDO_ORG_SERVICE_URL="{{ onepasswordRead (printf "op://%s/Azure DevOps PAT/hostname" .profile.op.vault) .profile.op.account }}"
-export AZDO_PERSONAL_ACCESS_TOKEN="{{ onepasswordRead (printf "op://%s/Azure DevOps PAT/credential" .profile.op.vault) .profile.op.account }}"
-export CLOUDFLARE_API_TOKEN="{{ onepasswordRead (printf "op://%s/Cloudflare API Token/credential" .profile.op.vault) .profile.op.account }}"
-export Serilog__KtDefaults__Seq__Enabled="false"
-export Serilog__KtDefaults__Console__MinimumLevel="Verbose"
-{{- end }}
-
 # Aliases
 {{- if lookPath "bat" }}
 alias cat="bat --paging=never"
