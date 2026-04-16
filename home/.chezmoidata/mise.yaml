@@ -16,9 +16,11 @@ mise:
         secret: Backblaze - Terraform State/password
       - name: PI_CODING_AGENT_DIR
         value: "{{ env.XDG_CONFIG_HOME }}/pi/agent"
+    shell_aliases: []
   server:
     tools: []
     env: []
+    shell_aliases: []
   work:
     tools:
       - name: bun
