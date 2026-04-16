@@ -7,9 +7,9 @@ experimental = true
 {{- range (index .mise $profile.key).tools }}
 {{ .name | quote }} = {{ $version := default "latest" (index . "version") -}}
 {{- if eq (kindOf $version) "slice" -}}
-[{{- range $i, $v := $version }}{{ if $i }}, {{ end }}"{{ $v }}"{{ end }}]
+[{{- range $i, $v := $version }}{{ if $i }}, {{ end }}{{ $v | quote }}{{ end }}]
 {{- else -}}
-"{{ $version }}"
+{{ $version | quote }}
 {{- end }}
 {{- end }}
 
