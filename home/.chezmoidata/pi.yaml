@@ -12,6 +12,9 @@ pi:
     - id: Qwen3.5-122B-A10B-GGUF
       name: Qwen3.5 122B A10B
       contextWindow: 262144
+    - id: user.Qwen3.6-35B-A3B-GGUF
+      name: Qwen3.6 35B A3B
+      contextWindow: 262144
     - id: gpt-oss-20b-FLM
       name: GPT OSS 20B NPU
       contextWindow: 131072
