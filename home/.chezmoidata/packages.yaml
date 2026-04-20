@@ -127,7 +127,8 @@ packages:
       type: cask
     - name: beyond-compare
       type: cask
-    - name: claude-code
+    - name: claude-code@latest
+      type: cask
     - name: daisydisk
       type: cask
     - name: drawio
