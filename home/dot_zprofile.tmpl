@@ -17,7 +17,9 @@ export EDITOR={{ lookPath "vim" | quote }}
 {{- end }}
 
 {{ if findExecutable "brew" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin") -}}
-# Set up Homebrew
+# Set up Homebrew (skip auto-update / analytics network calls on shell start)
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_ANALYTICS=1
 eval "$({{ findExecutable "brew" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin") }} shellenv)"
 {{- end }}
 

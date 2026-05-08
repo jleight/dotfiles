@@ -1,3 +1,27 @@
+# Per-section startup profiler — logs to ~/.zsh_startup.log.
+# Disable by setting ZSH_STARTUP_PROFILE=0 (or remove this block once tuned).
+: ${ZSH_STARTUP_PROFILE:=1}
+if (( ZSH_STARTUP_PROFILE )); then
+	zmodload zsh/datetime
+	_zsp_start=$EPOCHREALTIME
+	_zsp_prev=$_zsp_start
+	_zsp_log=~/.zsh_startup.log
+	_zsp_mark() {
+		local now=$EPOCHREALTIME
+		printf '%s  %5dms  %s\n' "$(date '+%F %T')" \
+			$(( (now - _zsp_prev) * 1000 )) "$1" >> $_zsp_log
+		_zsp_prev=$now
+	}
+	_zsp_done() {
+		local now=$EPOCHREALTIME
+		printf '%s  %5dms  TOTAL\n\n' "$(date '+%F %T')" \
+			$(( (now - _zsp_start) * 1000 )) >> $_zsp_log
+	}
+else
+	_zsp_mark() { :; }
+	_zsp_done() { :; }
+fi
+
 # PATH
 {{- if stat "/opt/homebrew/opt/curl/bin" }}
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
@@ -15,6 +39,7 @@ export PATH="$PATH:$HOME/.krew/bin"
 export PATH="$PATH:$HOME/go/bin"
 {{- end }}
 export PATH="$HOME/.local/bin:$PATH"
+_zsp_mark PATH
 
 # Aliases
 {{- if lookPath "bat" }}
@@ -32,13 +57,8 @@ alias vim="nvim"
 # Disable OMZ updates
 zstyle ':omz:update' mode disabled
 
-# Only re-initialize completions once per day
-autoload -Uz compinit
-if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
-	compinit
-else
-	compinit -C
-fi
+# Skip OMZ's compaudit security check (slow); compinit is handled by OMZ
+ZSH_DISABLE_COMPFIX=true
 
 # Enable OMZ plugins
 plugins=(
@@ -52,9 +72,15 @@ plugins=(
 # Set OMZ theme
 ZSH_THEME={{ .omz.theme | quote }}
 
+_zsp_mark "OMZ config"
+
 # Include OMZ
 export ZSH="${HOME}/.oh-my-zsh"
 source "${ZSH}/oh-my-zsh.sh"
+_zsp_mark "OMZ source"
 
 # Capture shell history with Atuin
 eval "$(atuin init zsh)"
+_zsp_mark "atuin init"
+
+_zsp_done
