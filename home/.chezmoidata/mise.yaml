@@ -3,6 +3,8 @@ mise:
     tools:
       - name: node
       - name: npm:@mariozechner/pi-coding-agent
+      - name: opentofu
+      - name: terragrunt
     env:
       - name: ASPNETCORE_ENVIRONMENT
         value: Development
@@ -16,6 +18,10 @@ mise:
         secret: Backblaze - Terraform State/password
       - name: PI_CODING_AGENT_DIR
         value: "{{ env.XDG_CONFIG_HOME }}/pi/agent"
+      - name: TG_PROVIDER_CACHE
+        value: 1
+      - name: TG_TF_PATH
+        value: tofu
     shell_aliases: []
   server:
     tools: []
@@ -29,7 +35,9 @@ mise:
       - name: hk
       - name: node
         version: lts
+      - name: opentofu
       - name: pitchfork
+      - name: terragrunt
       - name: uv
       - name: npm:@mariozechner/pi-coding-agent
       - name: npm:@opentofu/opentofu-mcp-server
@@ -56,6 +64,10 @@ mise:
         value: false
       - name: Serilog__KtDefaults__Console__MinimumLevel
         value: Verbose
+      - name: TG_PROVIDER_CACHE
+        value: 1
+      - name: TG_TF_PATH
+        value: tofu
     shell_aliases:
       - name: yolo
         command: claude --dangerously-skip-permissions

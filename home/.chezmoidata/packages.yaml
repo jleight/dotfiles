@@ -78,7 +78,6 @@ packages:
       type: cask
     - name: netspot
       type: cask
-    - name: opentofu
     - name: orbstack
       type: cask
     - name: orion
@@ -101,7 +100,6 @@ packages:
       type: cask
     - name: tailscale-app
       type: cask
-    - name: terragrunt
     - name: via
       type: cask
     - name: visual-studio-code
@@ -173,7 +171,6 @@ packages:
       type: cask
     - name: microsoft-office
       type: cask
-    - name: opentofu
     - name: orbstack
       type: cask
     - name: rectangle-pro
@@ -188,7 +185,6 @@ packages:
       type: cask
     - name: tailscale-app
       type: cask
-    - name: terragrunt
     - name: visual-studio-code@insiders
       type: cask
     - name: xscope

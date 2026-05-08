@@ -21,14 +21,6 @@ export EDITOR={{ lookPath "vim" | quote }}
 eval "$({{ findExecutable "brew" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin") }} shellenv)"
 {{- end }}
 
-{{ if lookPath "terragrunt" -}}
-# Terragrunt ENV
-export TG_PROVIDER_CACHE="1"
-{{ if lookPath "tofu" -}}
-export TG_TF_PATH="tofu"
-{{- end }}
-{{- end }}
-
 {{ if stat (joinPath .chezmoi.homeDir "/Library/Application Support/JetBrains/Toolbox/scripts") -}}
 # Added by Toolbox App
 export PATH="$PATH:{{ joinPath .chezmoi.homeDir "/Library/Application Support/JetBrains/Toolbox/scripts" }}"
