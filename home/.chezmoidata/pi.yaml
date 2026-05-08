@@ -15,6 +15,9 @@ pi:
     - id: Qwen3-Coder-Next-GGUF
       name: Qwen3 Coder Next
       contextWindow: 262144
+    - id: user.Qwen3.6-27B-GGUF
+      name: Qwen3.6 27B
+      contextWindow: 262144
     - id: user.Qwen3.6-35B-A3B-GGUF
       name: Qwen3.6 35B A3B
       contextWindow: 262144
