@@ -1,10 +1,8 @@
 omz:
   theme: gentoo
   plugins:
-    - name: asdf
     - name: aws
     - name: brew
-    - name: direnv
     - name: docker
     - name: docker-compose
       test: docker
