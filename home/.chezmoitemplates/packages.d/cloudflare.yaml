@@ -1,0 +1,4 @@
+mise:
+  env:
+    - name: CLOUDFLARE_API_TOKEN
+      secret: Cloudflare API Token/credential

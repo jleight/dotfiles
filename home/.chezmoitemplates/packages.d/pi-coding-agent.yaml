@@ -1,0 +1,7 @@
+install:
+  via:
+    mise: npm:@mariozechner/pi-coding-agent
+mise:
+  env:
+    - name: PI_CODING_AGENT_DIR
+      value: "{{ env.XDG_CONFIG_HOME }}/pi/agent"

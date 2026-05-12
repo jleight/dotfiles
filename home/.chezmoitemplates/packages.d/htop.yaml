@@ -1,0 +1,4 @@
+install:
+  via:
+    brew: htop
+    paru: htop

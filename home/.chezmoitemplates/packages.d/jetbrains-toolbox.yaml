@@ -1,0 +1,7 @@
+install:
+  via:
+    cask: jetbrains-toolbox
+zprofile:
+  content: |
+    # Added by Toolbox App
+    export PATH="$PATH:/Users/jleight/Library/Application Support/JetBrains/Toolbox/scripts"

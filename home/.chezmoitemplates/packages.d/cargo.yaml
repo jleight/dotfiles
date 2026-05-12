@@ -1,0 +1,6 @@
+when:
+  file_exists: ~/.cargo/env
+zshenv:
+  content: |
+    # Added by Cargo
+    . "$HOME/.cargo/env"

@@ -1,0 +1,6 @@
+install:
+  via:
+    brew: openssl@3
+    paru: openssl
+zprofile:
+  content: export PATH="${HOMEBREW_PREFIX}/opt/openssl@3/bin:$PATH"

@@ -1,0 +1,7 @@
+install:
+  via:
+    brew: fzf
+    paru: fzf
+omz:
+  plugins:
+    - fzf

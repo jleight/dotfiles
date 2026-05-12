@@ -1,0 +1,6 @@
+install:
+  via:
+    cask: claude-code@latest
+mise:
+  shell_alias:
+    yolo: claude --dangerously-skip-permissions

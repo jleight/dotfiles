@@ -1,4 +1,21 @@
-{{ if stat (joinPath .chezmoi.homeDir ".cargo/env") -}}
-# Added by Cargo
-. "$HOME/.cargo/env"
-{{- end }}
+{{- $packages := (includeTemplate "packages.tmpl" .) | fromYaml -}}
+{{- $active   := $packages.packages -}}
+{{- /* Per-package zshenv init, sorted by zshenv.order via map-key trick. */ -}}
+{{- $inits := dict -}}
+{{- range $active -}}
+  {{- $name := .name -}}
+  {{- with (index . "zshenv") -}}
+    {{- $order := default 50 (index . "order") | int -}}
+    {{- $key := printf "%04d_%s" $order $name -}}
+    {{- $inits = set $inits $key (dict "name" $name "order" $order "content" .content) -}}
+  {{- end -}}
+{{- end -}}
+{{- $first := true -}}
+{{- range $k, $v := $inits -}}
+  {{- if not $first }}
+
+{{ end -}}
+  {{- $first = false -}}
+# package={{ $v.name }}, order={{ $v.order }}
+{{ trimSuffix "\n" $v.content }}
+{{ end -}}

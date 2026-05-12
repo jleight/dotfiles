@@ -1,0 +1,53 @@
+{{- /*
+  Loads every package stub from .chezmoitemplates/packages.d/*.yaml, applies
+  per-profile `overrides.<profile>` (deep-merge on maps, replace on lists/scalars
+  via sprig `mergeOverwrite`), then filters by the `when` predicate. Only
+  packages whose `when` evaluates true are emitted. Consumers:
+
+    {{- $packages := (includeTemplate "packages.tmpl" .) | fromYaml -}}
+    {{- range $packages.packages -}}...{{- end -}}
+
+  `when` is a map of predicates, all AND'd together. Default if absent:
+    when: { included_in_profile: true }
+  Supplying `when:` REPLACES the default — to keep the profile gate alongside
+  another predicate, include `included_in_profile: true` explicitly.
+
+  Supported predicates:
+    included_in_profile: <bool>   # package name must be in active profile's list
+    file_exists: <path>           # path stat-able (path may start with ~/)
+*/ -}}
+{{- $profileKey := .profile.key -}}
+{{- $profile    := index .profiles $profileKey -}}
+{{- $enabled    := $profile.packages -}}
+{{- $pkgs := list -}}
+{{- range $path := (glob (joinPath .chezmoi.sourceDir ".chezmoitemplates" "packages.d" "*.yaml")) -}}
+  {{- $pkg := include $path | fromYaml -}}
+  {{- $pkg = set $pkg "name" (trimSuffix ".yaml" (base $path)) -}}
+  {{- /* per-profile override */ -}}
+  {{- $overrides := default dict (index $pkg "overrides") -}}
+  {{- $pkg = unset $pkg "overrides" -}}
+  {{- with (index $overrides $profileKey) -}}
+    {{- $pkg = mergeOverwrite $pkg . -}}
+  {{- end -}}
+  {{- /* evaluate when */ -}}
+  {{- $when := default (dict "included_in_profile" true) (index $pkg "when") -}}
+  {{- $active := true -}}
+  {{- if hasKey $when "included_in_profile" -}}
+    {{- if (index $when "included_in_profile") -}}
+      {{- if not (has $pkg.name $enabled) -}}{{- $active = false -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if and $active (hasKey $when "file_exists") -}}
+    {{- $path := index $when "file_exists" -}}
+    {{- if hasPrefix "~/" $path -}}{{- $path = joinPath $.chezmoi.homeDir (trimPrefix "~/" $path) -}}{{- end -}}
+    {{- if not (stat $path) -}}{{- $active = false -}}{{- end -}}
+  {{- end -}}
+  {{- if $active -}}
+    {{- $pkg = unset $pkg "when" -}}
+    {{- $pkgs = append $pkgs $pkg -}}
+  {{- end -}}
+{{- end -}}
+packages:
+{{- range $pkgs }}
+  - {{ . | toYaml | indent 4 | trim }}
+{{- end }}

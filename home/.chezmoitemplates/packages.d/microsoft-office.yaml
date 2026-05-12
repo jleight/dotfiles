@@ -1,0 +1,3 @@
+install:
+  via:
+    cask: microsoft-office

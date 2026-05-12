@@ -8,3 +8,6 @@ trim_trailing_whitespace = true
 [*.sh{,.tmpl}]
 indent_style = tab
 indent_size = 4
+
+[*.yaml]
+indent_size = 2

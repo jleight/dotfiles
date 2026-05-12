@@ -1,0 +1,4 @@
+mise:
+  env:
+    - name: BUNNYNET_API_KEY
+      secret: Bunny.net/api key

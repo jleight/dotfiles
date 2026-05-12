@@ -1,0 +1,7 @@
+install:
+  via:
+    brew: kubernetes-cli
+    paru: kubectl
+omz:
+  plugins:
+    - kubectl

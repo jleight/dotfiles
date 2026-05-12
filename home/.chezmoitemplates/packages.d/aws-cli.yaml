@@ -1,0 +1,7 @@
+install:
+  via:
+    brew: awscli
+    paru: aws-cli
+omz:
+  plugins:
+    - aws

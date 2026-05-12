@@ -1,30 +1,48 @@
-{{- $profile := .profile -}}
+{{- /*
+  Generated from .chezmoitemplates/packages.d/.
+  Emits mise [tools], [env], and [shell_alias] from packages enabled by the
+  active profile. Version semantics:
+    - no install.version / install.versions  → "latest"
+    - install.version: X                     → "X"
+    - install.versions: [X, Y, Z]            → ["X", "Y", "Z"]
+*/ -}}
+{{- $profile  := .profile -}}
+{{- $packages := (includeTemplate "packages.tmpl" .) | fromYaml -}}
+{{- $active   := $packages.packages -}}
 
 [settings]
 experimental = true
 
 [tools]
-{{- range (index .mise $profile.key).tools }}
-{{ .name | quote }} = {{ $version := default "latest" (index . "version") -}}
-{{- if eq (kindOf $version) "slice" -}}
-[{{- range $i, $v := $version }}{{ if $i }}, {{ end }}{{ $v | quote }}{{ end }}]
-{{- else -}}
-{{ $version | quote }}
-{{- end }}
+{{- range $active -}}
+  {{- $install := default dict (index . "install") -}}
+  {{- $via     := default dict (index $install "via") -}}
+  {{- if hasKey $via "mise" -}}
+    {{- $tool := index $via "mise" }}
+{{ $tool | quote }} = {{ if hasKey $install "versions" -}}
+[{{ range $i, $v := index $install "versions" }}{{ if $i }}, {{ end }}{{ printf "%v" $v | quote }}{{ end }}]
+    {{- else if hasKey $install "version" -}}
+{{ printf "%v" (index $install "version") | quote }}
+    {{- else -}}
+"latest"
+    {{- end -}}
+  {{- end -}}
 {{- end }}
 
 [env]
-{{- range (index .mise $profile.key).env }}
-{{- $secret := index . "secret" }}
-{{- $value := index . "value" }}
-{{- if $secret }}
-{{ .name }} = {{ onepasswordRead (printf "op://%s/%s" $profile.op.vault $secret) $profile.op.account | quote }}
-{{- else if $value }}
-{{ .name }} = {{ $value | quote }}
-{{- end }}
+{{- range $active }}
+  {{- range (default list (index (default dict (index . "mise")) "env")) }}
+    {{- if hasKey . "secret" }}
+{{ .name }} = {{ onepasswordRead (printf "op://%s/%s" $profile.op.vault (index . "secret")) $profile.op.account | quote }}
+    {{- else if hasKey . "value" }}
+{{ .name }} = {{ printf "%v" (index . "value") | quote }}
+    {{- end }}
+  {{- end }}
 {{- end }}
 
 [shell_alias]
-{{- range (index .mise $profile.key).shell_aliases }}
-{{ .name }} = {{ .command | quote }}
+{{- range $active }}
+  {{- range $k, $v := (default dict (index (default dict (index . "mise")) "shell_alias")) }}
+{{ $k }} = {{ $v | quote }}
+  {{- end }}
 {{- end }}

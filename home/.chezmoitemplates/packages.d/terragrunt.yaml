@@ -1,0 +1,12 @@
+install:
+  via:
+    mise: terragrunt
+omz:
+  plugins:
+    - terragrunt
+mise:
+  env:
+    - name: TG_PROVIDER_CACHE
+      value: "1"
+    - name: TG_TF_PATH
+      value: tofu

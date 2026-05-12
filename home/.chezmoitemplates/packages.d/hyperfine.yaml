@@ -1,0 +1,4 @@
+install:
+  via:
+    brew: hyperfine
+    paru: hyperfine

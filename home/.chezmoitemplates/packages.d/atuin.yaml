@@ -1,0 +1,7 @@
+install:
+  via:
+    brew: atuin
+    paru: atuin
+zshrc:
+  order: 90
+  content: eval "$(atuin init zsh)"

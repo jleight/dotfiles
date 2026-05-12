@@ -1,0 +1,4 @@
+zprofile:
+  content: export PATH="$HOME/.local/bin:$PATH"
+zshrc:
+  content: alias cwd="pwd | tr -d '\n' | pbcopy"

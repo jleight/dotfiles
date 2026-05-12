@@ -1,0 +1,7 @@
+install:
+  via:
+    brew: zoxide
+    paru: zoxide
+omz:
+  plugins:
+    - zoxide

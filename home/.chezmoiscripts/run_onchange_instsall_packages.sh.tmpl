@@ -12,26 +12,36 @@ is_command() {
 	type "$1" >/dev/null 2>&1
 }
 
+{{ $profile := index .profiles .profile.key -}}
+{{- $packages := (includeTemplate "packages.tmpl" .) | fromYaml -}}
+{{- $active := $packages.packages -}}
 main() {
+{{- if eq $profile.package_manager "brew" }}
 	if is_command brew; then
 		brew bundle --file=/dev/stdin <<-EOF
-{{- range .packages.base }}
-			{{ default "brew" (index . "type") }} {{ .name | quote }}
-{{- end }}
-{{- range (index .packages .profile.key) }}
-			{{ default "brew" (index . "type") }} {{ .name | quote }}
+{{- range $active }}
+  {{- $via := default dict (index (default dict (index . "install")) "via") }}
+  {{- if hasKey $via "brew" }}
+			brew "{{ index $via "brew" }}"
+  {{- end }}
+  {{- if hasKey $via "cask" }}
+			cask "{{ index $via "cask" }}"
+  {{- end }}
 {{- end }}
 		EOF
-	elif is_command paru; then
+	fi
+{{- else if eq $profile.package_manager "paru" }}
+	if is_command paru; then
 		paru -S --needed --noconfirm \
-{{- range .packages.base }}
-			{{ .name | quote }} \
-{{- end }}
-{{- range (index .packages .profile.key) }}
-			{{ .name | quote }} \
+{{- range $active }}
+  {{- $via := default dict (index (default dict (index . "install")) "via") }}
+  {{- if hasKey $via "paru" }}
+			{{ index $via "paru" | quote }} \
+  {{- end }}
 {{- end }}
 			paru
 	fi
+{{- end }}
 }
 
 main "$@"

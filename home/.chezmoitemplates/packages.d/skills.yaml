@@ -1,0 +1,3 @@
+install:
+  via:
+    mise: npm:skills

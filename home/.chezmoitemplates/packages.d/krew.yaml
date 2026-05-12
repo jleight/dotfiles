@@ -1,0 +1,2 @@
+zprofile:
+  content: export PATH="$PATH:$HOME/.krew/bin"

@@ -1,0 +1,12 @@
+install:
+  via:
+    brew: mise
+    paru: mise
+omz:
+  plugins:
+    - mise
+    - mise-run
+mise:
+  env:
+    - name: MISE_EXPERIMENTAL
+      value: "1"

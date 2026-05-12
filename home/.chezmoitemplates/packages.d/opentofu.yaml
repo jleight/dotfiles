@@ -1,0 +1,23 @@
+install:
+  via:
+    mise: opentofu
+omz:
+  plugins:
+    - terraform
+zshrc:
+  content: |
+    alias terraform="tofu"
+    alias tf="tofu"
+
+overrides:
+  laptop:
+    mise:
+      env:
+        - name: B2_TF_BUCKET_ENDPOINT
+          secret: Backblaze - Terraform State/website
+        - name: B2_TF_BUCKET_NAME
+          secret: Backblaze - Terraform State/bucket
+        - name: B2_TF_APPLICATION_KEY_ID
+          secret: Backblaze - Terraform State/username
+        - name: B2_TF_APPLICATION_KEY
+          secret: Backblaze - Terraform State/password

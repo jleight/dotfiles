@@ -1,0 +1,4 @@
+install:
+  via:
+    brew: zsh
+    paru: zsh

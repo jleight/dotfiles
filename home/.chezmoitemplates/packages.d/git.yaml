@@ -1,0 +1,7 @@
+install:
+  via:
+    brew: git
+    paru: git
+omz:
+  plugins:
+    - git

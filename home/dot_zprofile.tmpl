@@ -1,3 +1,12 @@
+{{- /*
+  Generated from .chezmoidata/packages.yaml.
+  Scaffolding (XDG, EDITOR, brew shellenv) is fixed; per-package zprofile
+  init blocks are appended in .zprofile.order order.
+*/ -}}
+
+{{- $packages := (includeTemplate "packages.tmpl" .) | fromYaml -}}
+{{- $active   := $packages.packages -}}
+
 # Set up XDG
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -9,26 +18,24 @@ export XDG_RUNTIME_DIR="/run/user/$UID"
 {{- end }}
 export XDG_STATE_HOME="$HOME/.local/state"
 
-# Set up vim
-{{ if lookPath "nvim" -}}
-export EDITOR={{ lookPath "nvim" | quote }}
-{{- else if lookPath "vim" -}}
-export EDITOR={{ lookPath "vim" | quote }}
-{{- end }}
-
 {{ if findExecutable "brew" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin") -}}
-# Set up Homebrew (skip auto-update / analytics network calls on shell start)
+# Set up Homebrew
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_ANALYTICS=1
 eval "$({{ findExecutable "brew" (list "/opt/homebrew/bin" "/home/linuxbrew/.linuxbrew/bin") }} shellenv)"
 {{- end }}
 
-{{ if stat (joinPath .chezmoi.homeDir "/Library/Application Support/JetBrains/Toolbox/scripts") -}}
-# Added by Toolbox App
-export PATH="$PATH:{{ joinPath .chezmoi.homeDir "/Library/Application Support/JetBrains/Toolbox/scripts" }}"
+{{- /* Per-package zprofile init, sorted by zprofile.order via map-key trick */ -}}
+{{- $inits := dict -}}
+{{- range $active -}}
+  {{- $name := .name -}}
+  {{- with (index . "zprofile") -}}
+    {{- $order := default 50 (index . "order") | int -}}
+    {{- $key := printf "%04d_%s" $order $name -}}
+    {{- $inits = set $inits $key (dict "name" $name "order" $order "content" .content) -}}
+  {{- end -}}
 {{- end }}
-
-{{ if stat (joinPath .chezmoi.homeDir ".orbstack/shell/init.zsh") -}}
-# Added by OrbStack: command-line tools and integration
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
-{{- end }}
+{{ range $k, $v := $inits }}
+# package={{ $v.name }}, order={{ $v.order }}
+{{ trimSuffix "\n" $v.content }}
+{{ end -}}

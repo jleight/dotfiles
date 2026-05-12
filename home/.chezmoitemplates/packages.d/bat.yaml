@@ -1,0 +1,6 @@
+install:
+  via:
+    brew: bat
+    paru: bat
+zshrc:
+  content: alias cat="bat --paging=never"

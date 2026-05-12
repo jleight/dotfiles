@@ -1,3 +1,13 @@
+{{- /*
+  Generated from .chezmoitemplates/packages.d/.
+  Emits OMZ plugin list and per-package zshrc init blocks (sorted by
+  zshrc.order, default 50). Aliases are authored as inline `alias x="y"`
+  lines inside zshrc.content.
+*/ -}}
+
+{{- $packages := (includeTemplate "packages.tmpl" .) | fromYaml -}}
+{{- $active   := $packages.packages -}}
+
 # Per-section startup profiler — logs to ~/.zsh_startup.log.
 # Disable by setting ZSH_STARTUP_PROFILE=0 (or remove this block once tuned).
 : ${ZSH_STARTUP_PROFILE:=1}
@@ -22,65 +32,40 @@ else
 	_zsp_done() { :; }
 fi
 
-# PATH
-{{- if stat "/opt/homebrew/opt/curl/bin" }}
-export PATH="/opt/homebrew/opt/curl/bin:$PATH"
-{{- end }}
-{{- if stat "/opt/homebrew/opt/openssl@3/bin" }}
-export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-{{- end }}
-{{- if stat (joinPath .chezmoi.homeDir ".dotnet/tools") }}
-export PATH="$PATH:$HOME/.dotnet/tools"
-{{- end }}
-{{- if stat (joinPath .chezmoi.homeDir ".krew/bin") }}
-export PATH="$PATH:$HOME/.krew/bin"
-{{- end }}
-{{- if stat (joinPath .chezmoi.homeDir "go/bin") }}
-export PATH="$PATH:$HOME/go/bin"
-{{- end }}
-export PATH="$HOME/.local/bin:$PATH"
-_zsp_mark PATH
-
-# Aliases
-{{- if lookPath "bat" }}
-alias cat="bat --paging=never"
-{{- end }}
-alias cwd="pwd | tr -d '\n' | pbcopy"
-{{- if lookPath "tofu" }}
-alias terraform="tofu"
-alias tf="tofu"
-{{- end }}
-{{- if lookPath "nvim" }}
-alias vim="nvim"
-{{- end }}
-
 # Disable OMZ updates
 zstyle ':omz:update' mode disabled
 
-# Skip OMZ's compaudit security check (slow); compinit is handled by OMZ
+# Skip OMZ's compaudit security check (slow)
 ZSH_DISABLE_COMPFIX=true
 
 # Enable OMZ plugins
 plugins=(
-{{- range .omz.plugins }}
-{{- if lookPath (default .name (index . "test")) }}
-	{{ .name }}
-{{- end }}
-{{- end }}
+{{- range $active }}{{ with (index . "omz") }}{{ range (default list (index . "plugins")) }}
+	{{ . }}
+{{- end }}{{ end }}{{ end }}
 )
 
 # Set OMZ theme
-ZSH_THEME={{ .omz.theme | quote }}
-
+ZSH_THEME="gentoo"
 _zsp_mark "OMZ config"
 
 # Include OMZ
 export ZSH="${HOME}/.oh-my-zsh"
 source "${ZSH}/oh-my-zsh.sh"
 _zsp_mark "OMZ source"
-
-# Capture shell history with Atuin
-eval "$(atuin init zsh)"
-_zsp_mark "atuin init"
-
+{{/* Per-package zshrc init, sorted by zshrc.order via map-key trick */ -}}
+{{- $inits := dict -}}
+{{- range $active -}}
+  {{- $name := .name -}}
+  {{- with (index . "zshrc") -}}
+    {{- $order := default 50 (index . "order") | int -}}
+    {{- $key := printf "%04d_%s" $order $name -}}
+    {{- $inits = set $inits $key (dict "name" $name "order" $order "content" .content) -}}
+  {{- end -}}
+{{- end -}}
+{{- range $k, $v := $inits }}
+# package={{ $v.name }}, order={{ $v.order }}
+{{ trimSuffix "\n" $v.content }}
+_zsp_mark {{ $v.name | quote }}
+{{ end }}
 _zsp_done

@@ -1,0 +1,6 @@
+install:
+  via:
+    brew: curl
+    paru: curl
+zprofile:
+  content: export PATH="${HOMEBREW_PREFIX}/opt/curl/bin:$PATH"

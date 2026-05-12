@@ -1,0 +1,6 @@
+mise:
+  env:
+    - name: AZDO_ORG_SERVICE_URL
+      secret: Azure DevOps PAT/hostname
+    - name: AZDO_PERSONAL_ACCESS_TOKEN
+      secret: Azure DevOps PAT/credential

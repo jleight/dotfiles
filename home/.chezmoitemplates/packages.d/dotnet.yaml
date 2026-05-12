@@ -1,0 +1,23 @@
+install:
+  via:
+    mise: dotnet
+omz:
+  plugins:
+    - dotnet
+mise:
+  env:
+    - name: ASPNETCORE_ENVIRONMENT
+      value: Development
+
+overrides:
+  work:
+    install:
+      versions: [10, 9, 8, 7, 6]
+    mise:
+      env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: Serilog__KtDefaults__Console__MinimumLevel
+          value: Verbose
+        - name: Serilog__KtDefaults__Seq__Enabled
+          value: "false"

@@ -1,0 +1,12 @@
+omz:
+  plugins:
+    - brew
+zshrc:
+  content: |
+    brew() {
+    	if [[ "$1" == "up" ]]; then
+    		command brew update && command brew upgrade
+    	else
+    		command brew "$@"
+    	fi
+    }

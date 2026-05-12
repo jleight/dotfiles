@@ -1,0 +1,4 @@
+install:
+  via:
+    brew: azure-cli
+    paru: azure-cli
