@@ -1,3 +1,21 @@
+{{/*
+Keep path/fpath duplicate-free.
+
+FPATH is exported, so a nested shell inherits the parent's fpath and then the login
+files re-add their own entries on top of it (brew shellenv prepends its site-functions,
+orbstack's init.zsh appends its completions). fpath therefore grew by one entry per
+nesting level: 23 entries in an iTerm2 tab, 41 in a shell a few levels deep.
+
+That matters because oh-my-zsh records "#omz fpath: $fpath" inside its compdump and
+deletes the dump whenever the current fpath doesn't match. Alternating between a
+top-level tab and a nested IDE terminal invalidated it every time, forcing a full
+compinit plus zcompile of a ~120KB dump on most shell starts.
+
+Deduping here (before .zprofile runs) makes fpath identical at every nesting depth, so
+the dump stays valid and is reused.
+*/ -}}
+typeset -U path fpath
+
 {{ if stat (joinPath .chezmoi.homeDir ".cargo/env") -}}
 # Added by Cargo
 . "$HOME/.cargo/env"
