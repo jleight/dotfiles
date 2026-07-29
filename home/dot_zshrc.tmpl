@@ -54,6 +54,15 @@ alias tf="tofu"
 alias vim="nvim"
 {{- end }}
 
+# Functions
+brew() {
+	if [[ "$1" == "up" ]]; then
+		command brew update && command brew upgrade
+	else
+		command brew "$@"
+	fi
+}
+
 # Disable OMZ updates
 zstyle ':omz:update' mode disabled
 
