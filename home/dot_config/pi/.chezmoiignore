@@ -1,6 +1,6 @@
 {{- $hasPiAgent := false }}
 {{- range (index .mise .profile.key).tools }}
-{{- if eq .name "npm:@mariozechner/pi-coding-agent" }}
+{{- if eq .name "npm:@earendil-works/pi-coding-agent" }}
 {{- $hasPiAgent = true }}
 {{- end }}
 {{- end }}

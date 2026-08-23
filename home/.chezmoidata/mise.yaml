@@ -2,7 +2,7 @@ mise:
   laptop:
     tools:
       - name: node
-      - name: npm:@mariozechner/pi-coding-agent
+      - name: npm:@earendil-works/pi-coding-agent
       - name: opentofu
       - name: terragrunt
     env:
@@ -41,7 +41,7 @@ mise:
       - name: terragrunt
       - name: uv
       - name: cargo:jleight/steveql-fmt
-      - name: npm:@mariozechner/pi-coding-agent
+      - name: npm:@earendil-works/pi-coding-agent
       - name: npm:@opentofu/opentofu-mcp-server
       - name: npm:chrome-devtools-mcp
       - name: npm:skills

@@ -3,21 +3,9 @@ pi:
     - id: Gemma-4-26B-A4B-it-GGUF
       name: Gemma 4 26B A4B
       contextWindow: 262144
-    - id: gpt-oss-20b-mxfp4-GGUF
-      name: GPT OSS 20B GPU
-      contextWindow: 131072
-    - id: gpt-oss-20b-FLM
-      name: GPT OSS 20B NPU
-      contextWindow: 131072
-    - id: user.MiniMax-M2.7-GGUF
-      name: MiniMax M2.7
-      contextWindow: 32768
     - id: Qwen3-Coder-Next-GGUF
       name: Qwen3 Coder Next
       contextWindow: 262144
-    - id: user.Qwen3.6-27B-GGUF
-      name: Qwen3.6 27B
-      contextWindow: 262144
-    - id: user.Qwen3.6-35B-A3B-GGUF
-      name: Qwen3.6 35B A3B
+    - id: Qwen3.8-27B-GGUF-UD-Q8_K_XL
+      name: Qwen3.8 27B
       contextWindow: 262144
