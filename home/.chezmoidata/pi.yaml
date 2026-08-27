@@ -9,3 +9,6 @@ pi:
     - id: Qwen3.8-27B-GGUF-UD-Q8_K_XL
       name: Qwen3.8 27B
       contextWindow: 262144
+    - id: Qwen3.8-Flash-Next-GGUF-UD-Q4_K_XL
+      name: Qwen3.8 Flash Next
+      contextWindow: 65536
