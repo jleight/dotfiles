@@ -1,6 +1,7 @@
 mise:
   laptop:
     tools:
+      - name: hk
       - name: node
       - name: npm:@earendil-works/pi-coding-agent
       - name: opentofu
