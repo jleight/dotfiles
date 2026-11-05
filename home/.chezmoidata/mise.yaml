@@ -4,6 +4,7 @@ mise:
       - name: hk
       - name: node
       - name: npm:@earendil-works/pi-coding-agent
+      - name: npm:skills
       - name: opentofu
       - name: packslip:github.com/leightweight/orca-tasks
       - name: terragrunt
