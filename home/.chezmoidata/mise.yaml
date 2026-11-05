@@ -56,6 +56,8 @@ mise:
         secret: Azure DevOps PAT/hostname
       - name: AZDO_PERSONAL_ACCESS_TOKEN
         secret: Azure DevOps PAT/credential
+      - name: AZURE_DEVOPS_EXT_PAT
+        secret: Azure DevOps PAT/credential
       - name: BUNNYNET_API_KEY
         secret: Bunny.net/api key
       - name: CLOUDFLARE_API_TOKEN
