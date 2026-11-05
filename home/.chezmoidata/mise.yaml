@@ -4,6 +4,7 @@ mise:
       - name: node
       - name: npm:@earendil-works/pi-coding-agent
       - name: opentofu
+      - name: packslip:github.com/leightweight/orca-tasks
       - name: terragrunt
     env:
       - name: ASPNETCORE_ENVIRONMENT
@@ -16,6 +17,10 @@ mise:
         secret: Backblaze - Terraform State/username
       - name: B2_TF_APPLICATION_KEY
         secret: Backblaze - Terraform State/password
+      - name: ORCA_TASKS_TOKEN
+        secret: Orca Tasks/jlmbp03-claude
+      - name: ORCA_TASKS_URL
+        secret: Orca Tasks/website
       - name: PI_CODING_AGENT_DIR
         value: "{{ env.XDG_CONFIG_HOME }}/pi/agent"
       - name: TG_PROVIDER_CACHE
@@ -45,6 +50,7 @@ mise:
       - name: npm:@opentofu/opentofu-mcp-server
       - name: npm:chrome-devtools-mcp
       - name: npm:skills
+      - name: packslip:github.com/leightweight/orca-tasks
       - name: pipx:pynvim
       - name: pipx:postgres-mcp
     env:
@@ -62,6 +68,10 @@ mise:
         secret: Bunny.net/api key
       - name: CLOUDFLARE_API_TOKEN
         secret: Cloudflare API Token/credential
+      - name: ORCA_TASKS_TOKEN
+        secret: Orca Tasks - Claude/credential
+      - name: ORCA_TASKS_URL
+        secret: Orca Tasks - Claude/hostname
       - name: PI_CODING_AGENT_DIR
         value: "{{ env.XDG_CONFIG_HOME }}/pi/agent"
       - name: Serilog__KtDefaults__Seq__Enabled
