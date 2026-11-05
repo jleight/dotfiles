@@ -55,6 +55,11 @@ alias vim="nvim"
 {{- end }}
 
 # Functions
+{{- if eq .profile.key "work" }}
+terragrunt() {
+	AWS_PROFILE=970162838206-AWSAdministratorAccess command terragrunt "$@"
+}
+{{ end }}
 brew() {
 	if [[ "$1" == "up" ]]; then
 		command brew update && command brew upgrade --yes
