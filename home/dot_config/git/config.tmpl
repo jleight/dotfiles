@@ -40,7 +40,26 @@
 
 {{- if eq .profile.key "work" }}
 [credential]
+	helper =
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[credential "azrepos:org/kangarootime"]
+	username = {{ .me.email }}
+	azureAuthority = https://login.microsoftonline.com/4f3ac0ce-f7c2-4e63-a31c-416ae4d7bf11
+{{- end }}
+
+{{ if stat (joinPath .chezmoi.homeDir ".local/share/mise/shims/hk") -}}
+[hook "hk-commit-msg"]
+	command = test \"${HK:-1}\" = \"0\" || ~/.local/share/mise/shims/hk run commit-msg --from-hook
+	event = commit-msg
+[hook "hk-pre-commit"]
+	command = test \"${HK:-1}\" = \"0\" || ~/.local/share/mise/shims/hk run pre-commit --from-hook --staged
+	event = pre-commit
+[hook "hk-pre-push"]
+	command = test \"${HK:-1}\" = \"0\" || ~/.local/share/mise/shims/hk run pre-push --from-hook
+	event = pre-push
+[hook "hk-prepare-commit-msg"]
+	command = test \"${HK:-1}\" = \"0\" || ~/.local/share/mise/shims/hk run prepare-commit-msg --from-hook
+	event = prepare-commit-msg
 {{- end }}
