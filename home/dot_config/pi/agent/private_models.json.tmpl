@@ -1,5 +1,44 @@
 {
   "providers": {
+    "ds4": {
+      "baseUrl": "http://fwd01.leightha.us:8881/v1",
+      "api": "openai-completions",
+      "apiKey": "dsv4-local",
+      "compat": {
+        "supportsStore": false,
+        "supportsDeveloperRole": false,
+        "supportsReasoningEffort": true,
+        "supportsUsageInStreaming": true,
+        "maxTokensField": "max_tokens",
+        "supportsStrictMode": false,
+        "thinkingFormat": "deepseek",
+        "requiresReasoningContentOnAssistantMessages": true
+      },
+      "models": [
+        {
+          "id": "deepseek-v4-flash",
+          "name": "DwarfStar Flash",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": "low",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh"
+          },
+          "input": ["text"],
+          "contextWindow": 100000,
+          "maxTokens": 16384,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    },
     "openwebui": {
       "baseUrl": "https://{{ onepasswordRead (printf "op://%s/Open WebUI/hostname" .profile.op.vault) .profile.op.account }}/api",
       "api": "openai-completions",
