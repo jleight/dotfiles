@@ -42,7 +42,7 @@ mise:
     tools:
       - name: bun
       - name: dotnet
-        version: [10, 9, 8, 7, 6]
+        version: [11, 10, 9, 8, 7, 6]
       - name: hk
       - name: node
         version: lts
