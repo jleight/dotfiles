@@ -1,9 +1,9 @@
 {
   "providers": {
-    "bifrost": {
-      "baseUrl": "https://{{ onepasswordRead (printf "op://%s/Bifrost - Pi/hostname" .profile.op.vault) .profile.op.account }}/v1",
+    "openwebui": {
+      "baseUrl": "https://{{ onepasswordRead (printf "op://%s/Open WebUI/hostname" .profile.op.vault) .profile.op.account }}/api",
       "api": "openai-completions",
-      "apiKey": "{{ onepasswordRead (printf "op://%s/Bifrost - Pi/credential" .profile.op.vault) .profile.op.account }}",
+      "apiKey": "{{ onepasswordRead (printf "op://%s/Open WebUI/credential" .profile.op.vault) .profile.op.account }}",
       "models": [
 {{- range $i, $ := .pi.models }}
         {{- if $i }},{{ end }}
